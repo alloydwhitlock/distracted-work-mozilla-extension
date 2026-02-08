@@ -18,7 +18,8 @@
       "Bash(npx web-ext build:*)",
       "Bash(unzip:*)",
       "Bash(git -C /Users/whitlock/Projects/distracted-work-extension log --oneline -10)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(gh repo edit:*)"
     ]
   }
 }
