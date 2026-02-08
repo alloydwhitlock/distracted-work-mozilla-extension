@@ -372,7 +372,8 @@ describe('DEFAULT_SETTINGS', () => {
         endTime: '17:00'
       },
       theme: 'auto',
-      hasDonated: false
+      style: 'classic',
+      hideAuthor: false
     });
   });
 
@@ -398,7 +399,11 @@ describe('DEFAULT_SETTINGS', () => {
     expect(DEFAULT_SETTINGS.theme).toBe('auto');
   });
 
-  test('hasDonated defaults to false', () => {
-    expect(DEFAULT_SETTINGS.hasDonated).toBe(false);
+  test('hideAuthor defaults to false', () => {
+    expect(DEFAULT_SETTINGS.hideAuthor).toBe(false);
+  });
+
+  test('style defaults to classic', () => {
+    expect(DEFAULT_SETTINGS.style).toBe('classic');
   });
 });

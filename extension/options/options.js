@@ -18,8 +18,10 @@
   var saveScheduleBtn = document.getElementById('saveScheduleBtn');
   var scheduleFeedback = document.getElementById('scheduleFeedback');
   var themeSelector = document.getElementById('themeSelector');
-  var donorToggle = document.getElementById('donorToggle');
+  var hideAuthorToggle = document.getElementById('hideAuthorToggle');
+  var coffeeMessage = document.getElementById('coffeeMessage');
   var attribution = document.getElementById('attribution');
+  var styleSelector = document.getElementById('styleSelector');
   var modalOverlay = document.getElementById('modalOverlay');
   var modalTitle = document.getElementById('modalTitle');
   var modalMessage = document.getElementById('modalMessage');
@@ -228,9 +230,10 @@
     });
   }
 
-  function renderAttribution(hasDonated) {
-    attribution.style.display = hasDonated ? 'none' : '';
-    donorToggle.checked = hasDonated;
+  function renderAttribution(hideAuthor) {
+    attribution.style.display = hideAuthor ? 'none' : '';
+    hideAuthorToggle.checked = hideAuthor;
+    coffeeMessage.classList.toggle('visible', hideAuthor);
   }
 
   function loadAndRender() {
@@ -240,7 +243,8 @@
       renderSiteList(settings.blockedSites);
       renderSchedule(settings.schedule);
       applyTheme(settings.theme || 'auto');
-      renderAttribution(settings.hasDonated || false);
+      applyStyle(settings.style || 'classic');
+      renderAttribution(settings.hideAuthor || false);
     });
   }
 
@@ -334,13 +338,34 @@
     });
   });
 
-  // Donor toggle
-  donorToggle.addEventListener('change', function () {
-    var hasDonated = donorToggle.checked;
-    renderAttribution(hasDonated);
+  // Hide author toggle
+  hideAuthorToggle.addEventListener('change', function () {
+    var hideAuthor = hideAuthorToggle.checked;
+    renderAttribution(hideAuthor);
 
     browser.runtime.sendMessage({ type: 'getSettings' }).then(function (settings) {
-      settings.hasDonated = hasDonated;
+      settings.hideAuthor = hideAuthor;
+      browser.runtime.sendMessage({ type: 'saveSettings', settings: settings });
+    });
+  });
+
+  // Style selector
+  function applyStyle(style) {
+    document.body.setAttribute('data-style', style);
+    var btns = styleSelector.querySelectorAll('.theme-btn');
+    btns.forEach(function (btn) {
+      btn.classList.toggle('active', btn.dataset.style === style);
+    });
+  }
+
+  styleSelector.addEventListener('click', function (e) {
+    var btn = e.target.closest('.theme-btn');
+    if (!btn) return;
+    var style = btn.dataset.style;
+    applyStyle(style);
+
+    browser.runtime.sendMessage({ type: 'getSettings' }).then(function (settings) {
+      settings.style = style;
       browser.runtime.sendMessage({ type: 'saveSettings', settings: settings });
     });
   });

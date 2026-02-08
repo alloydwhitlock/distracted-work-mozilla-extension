@@ -62,6 +62,21 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* New York theme */
+    body[data-style="new-york"] {
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    body[data-style="new-york"].light { background-color: #faf9f6; color: #121212; }
+    body[data-style="new-york"].dark { background-color: #121212; color: #f0f0f0; }
+    body[data-style="new-york"] #message {
+      font-weight: 400; font-style: italic; letter-spacing: -0.01em;
+    }
+    body[data-style="new-york"].light #message { color: #121212; }
+    body[data-style="new-york"].dark #message { color: #f0f0f0; }
+    body[data-style="new-york"] .btn { border-radius: 4px; }
+    body[data-style="new-york"] .btn-primary { background-color: #326891; }
+    body[data-style="new-york"] .theme-toggle { font-family: Georgia, 'Times New Roman', Times, serif; }
   </style>
 </head>
 <body class="light">
@@ -69,7 +84,7 @@
 
   <div class="container">
     <div id="message"></div>
-    <p class="subtitle">— distracted.work</p>
+    <p class="subtitle">distracted.work</p>
     <div class="actions">
       <button class="btn btn-primary" id="newMessage">Another One</button>
       <button class="btn btn-secondary" id="closeTab">Close This Tab</button>

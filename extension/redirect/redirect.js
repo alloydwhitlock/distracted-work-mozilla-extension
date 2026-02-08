@@ -68,8 +68,11 @@
       browser.storage.local.get('settings').then(function (result) {
         var theme = (result.settings && result.settings.theme) || 'auto';
         applyTheme(theme);
-        // Also handle attribution hiding for donors
-        if (result.settings && result.settings.hasDonated) {
+        // Apply style
+        var style = (result.settings && result.settings.style) || 'classic';
+        document.body.setAttribute('data-style', style);
+        // Also handle attribution hiding
+        if (result.settings && result.settings.hideAuthor) {
           var attr = document.getElementById('redirectAttribution');
           if (attr) attr.style.display = 'none';
         }

@@ -113,24 +113,31 @@ describe('Options Page', () => {
     expect(styles.textContent).toContain('body.light');
   });
 
-  // --- Donation ---
+  // --- Style ---
 
-  test('has a donate link with correct Ko-fi URL', () => {
-    const donateLink = document.getElementById('donateLink');
-    expect(donateLink).not.toBeNull();
-    expect(donateLink.href).toContain('ko-fi.com/alloydwhitlock');
+  test('has a style selector with Classic and New York buttons', () => {
+    const selector = document.getElementById('styleSelector');
+    expect(selector).not.toBeNull();
+    const buttons = selector.querySelectorAll('.theme-btn');
+    expect(buttons.length).toBe(2);
+    const styles = Array.from(buttons).map(b => b.dataset.style);
+    expect(styles).toEqual(['classic', 'new-york']);
   });
 
-  test('has a donor toggle checkbox', () => {
-    const toggle = document.getElementById('donorToggle');
+  // --- Support ---
+
+  test('has a hide author toggle', () => {
+    const toggle = document.getElementById('hideAuthorToggle');
     expect(toggle).not.toBeNull();
     expect(toggle.type).toBe('checkbox');
   });
 
-  test('donor toggle label mentions hiding credit', () => {
-    const label = document.getElementById('donorToggle').closest('label');
-    expect(label.textContent).toContain('donated');
-    expect(label.textContent).toContain('hide');
+  test('has a coffee message area with Ko-fi link', () => {
+    const coffeeMsg = document.getElementById('coffeeMessage');
+    expect(coffeeMsg).not.toBeNull();
+    const donateLink = document.getElementById('donateLink');
+    expect(donateLink).not.toBeNull();
+    expect(donateLink.href).toContain('ko-fi.com/alloydwhitlock');
   });
 
   // --- Attribution ---
@@ -196,12 +203,12 @@ describe('Options Page', () => {
     expect(confirm.classList.contains('modal-btn-confirm')).toBe(true);
   });
 
-  test('modal buttons container has swappy class for hover position swap', () => {
+  test('modal buttons container has swappy class for static position swap', () => {
     const buttons = document.getElementById('modalButtons');
     expect(buttons.classList.contains('swappy')).toBe(true);
     // Verify CSS has the swap rule
     const styles = document.querySelector('style');
-    expect(styles.textContent).toContain('.swappy:hover');
+    expect(styles.textContent).toContain('.swappy');
     expect(styles.textContent).toContain('order:');
   });
 

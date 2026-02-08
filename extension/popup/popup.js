@@ -12,7 +12,12 @@
   var permanentCheck = document.getElementById('permanentCheck');
   var feedbackMsg = document.getElementById('feedbackMsg');
   var optionsBtn = document.getElementById('optionsBtn');
+  var themeBtn = document.getElementById('themeBtn');
   var popupAttribution = document.getElementById('popupAttribution');
+
+  var THEME_CYCLE = ['auto', 'light', 'dark'];
+  var THEME_LABELS = { auto: 'Auto', light: 'Light', dark: 'Dark' };
+  var currentThemeSetting = 'auto';
 
   function showFeedback(text, type) {
     feedbackMsg.textContent = text;
@@ -28,9 +33,27 @@
   }
 
   function applyTheme(setting) {
+    currentThemeSetting = setting;
     var resolved = resolveTheme(setting);
     document.body.classList.remove('light', 'dark');
     document.body.classList.add(resolved);
+    if (themeBtn) {
+      themeBtn.textContent = THEME_LABELS[setting] || 'Auto';
+    }
+  }
+
+  function applyStyle(style) {
+    document.body.setAttribute('data-style', style);
+  }
+
+  function cycleTheme() {
+    var idx = THEME_CYCLE.indexOf(currentThemeSetting);
+    var next = THEME_CYCLE[(idx + 1) % THEME_CYCLE.length];
+    applyTheme(next);
+    browser.runtime.sendMessage({ type: 'getSettings' }).then(function (settings) {
+      settings.theme = next;
+      browser.runtime.sendMessage({ type: 'saveSettings', settings: settings });
+    });
   }
 
   function updateStatus(data) {
@@ -63,10 +86,11 @@
     return domain;
   }
 
-  // Load settings for theme and attribution, then load status
+  // Load settings for theme, style, and attribution, then load status
   browser.runtime.sendMessage({ type: 'getSettings' }).then(function (settings) {
     applyTheme(settings.theme || 'auto');
-    if (settings.hasDonated) {
+    applyStyle(settings.style || 'classic');
+    if (settings.hideAuthor) {
       popupAttribution.style.display = 'none';
     }
   });
@@ -121,6 +145,8 @@
     browser.runtime.openOptionsPage();
     window.close();
   });
+
+  themeBtn.addEventListener('click', cycleTheme);
 
   // Export for testing
   if (typeof module !== 'undefined' && module.exports) {

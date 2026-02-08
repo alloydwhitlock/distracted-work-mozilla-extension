@@ -109,6 +109,22 @@
     body.dark .popup-attribution { border-top-color: #1a1a4e; color: #555; }
     .popup-attribution a { color: #4361ee; text-decoration: none; }
     .popup-attribution a:hover { text-decoration: underline; }
+
+    /* New York theme */
+    body[data-style="new-york"] {
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    body[data-style="new-york"].light { background: #faf9f6; color: #121212; }
+    body[data-style="new-york"].dark { background: #121212; color: #f0f0f0; }
+    body[data-style="new-york"] .header h1 { letter-spacing: -0.01em; }
+    body[data-style="new-york"].dark .header h1 { color: #f0f0f0; }
+    body[data-style="new-york"] .toggle input:checked + .toggle-slider { background-color: #326891; }
+    body[data-style="new-york"] .quick-add button { background: #326891; border-radius: 4px; }
+    body[data-style="new-york"] .quick-add button:hover { background: #2a5a7e; }
+    body[data-style="new-york"] .quick-add input { border-radius: 4px; }
+    body[data-style="new-york"] .btn { border-radius: 4px; }
+    body[data-style="new-york"] .btn-donate { background: #ff6b35; border-color: #ff6b35; border-radius: 4px; }
+    body[data-style="new-york"] .popup-attribution a { color: #326891; }
   </style>
 </head>
 <body class="light">
@@ -144,6 +160,7 @@
   <div class="section">
     <div class="btn-row">
       <button class="btn" id="optionsBtn">Options</button>
+      <button class="btn" id="themeBtn">Auto</button>
       <a class="btn btn-donate" id="donateBtn" href="https://ko-fi.com/alloydwhitlock" target="_blank">Donate</a>
     </div>
   </div>

@@ -13,7 +13,8 @@ const DEFAULT_SETTINGS = {
     endTime: '17:00'
   },
   theme: 'auto',
-  hasDonated: false
+  style: 'classic',
+  hideAuthor: false
 };
 
 /**

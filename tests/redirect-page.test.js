@@ -73,10 +73,10 @@ describe('Redirect Page', () => {
     expect(body.classList.contains('light')).toBe(true);
   });
 
-  test('page subtitle references distracted.work', () => {
+  test('page subtitle shows distracted.work without dash', () => {
     const subtitle = document.querySelector('.subtitle');
     expect(subtitle).not.toBeNull();
-    expect(subtitle.textContent).toContain('distracted.work');
+    expect(subtitle.textContent).toBe('distracted.work');
   });
 
   test('theme toggle shows text label (not emoji)', () => {

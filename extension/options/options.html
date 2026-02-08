@@ -210,19 +210,55 @@
     .modal-btn-confirm:hover { background: #f8d7da; color: #721c24; }
     body.dark .modal-btn-confirm:hover { background: #4a1a1a; color: #ff6b6b; }
 
-    /* Button swap on hover for the first modal step */
-    .modal-buttons.swappy:hover .modal-btn-cancel { order: 2; }
-    .modal-buttons.swappy:hover .modal-btn-confirm { order: 1; }
+    /* Swap button positions in the first modal step so cancel is on the right (prominent) */
+    .modal-buttons.swappy .modal-btn-cancel { order: 2; }
+    .modal-buttons.swappy .modal-btn-confirm { order: 1; }
 
     @keyframes modalIn {
       from { opacity: 0; transform: scale(0.95); }
       to { opacity: 1; transform: scale(1); }
     }
 
-    /* Donor thank-you section */
-    .donor-section { margin-top: 1rem; font-size: 0.85rem; color: #666; }
-    body.dark .donor-section { color: #aaa; }
-    .donor-section label { display: flex; align-items: center; gap: 0.4rem; cursor: pointer; }
+    /* Style selector */
+    .style-selector { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+
+    /* Coffee message */
+    .coffee-message {
+      display: none; margin-top: 1rem; padding: 1rem; border-radius: 8px;
+      background: #fff8f0; text-align: center; font-size: 0.9rem; color: #666;
+    }
+    body.dark .coffee-message { background: #2a1f14; color: #aaa; }
+    .coffee-message.visible { display: block; }
+    .coffee-message p { margin-bottom: 0.75rem; }
+
+    /* New York theme */
+    body[data-style="new-york"] {
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    body[data-style="new-york"].light { background: #faf9f6; color: #121212; }
+    body[data-style="new-york"].dark { background: #121212; color: #f0f0f0; }
+    body[data-style="new-york"] h1 { letter-spacing: -0.01em; }
+    body[data-style="new-york"].dark h1 { color: #f0f0f0; }
+    body[data-style="new-york"] .card { border-radius: 4px; border: 1px solid #e0ddd8; }
+    body[data-style="new-york"].light .card { background: #fff; border-color: #e0ddd8; }
+    body[data-style="new-york"].dark .card { background: #1a1a1a; border-color: #333; }
+    body[data-style="new-york"] .card h2 { font-size: 1rem; letter-spacing: 0.02em; }
+    body[data-style="new-york"] .toggle input:checked + .toggle-slider { background-color: #326891; }
+    body[data-style="new-york"] .add-form button,
+    body[data-style="new-york"] .btn-save { background: #326891; border-radius: 4px; }
+    body[data-style="new-york"] .add-form button:hover,
+    body[data-style="new-york"] .btn-save:hover { background: #2a5a7e; }
+    body[data-style="new-york"] .theme-btn { border-radius: 4px; }
+    body[data-style="new-york"] .theme-btn.active { background: #326891; border-color: #326891; }
+    body[data-style="new-york"] .add-form input[type="text"],
+    body[data-style="new-york"] .schedule-row input[type="time"] { border-radius: 4px; }
+    body[data-style="new-york"] .modal { border-radius: 4px; }
+    body[data-style="new-york"] .modal-btn { border-radius: 4px; }
+    body[data-style="new-york"] .modal-btn-cancel { background: #326891; }
+    body[data-style="new-york"] .modal-btn-cancel:hover { background: #2a5a7e; }
+    body[data-style="new-york"] .footer-links a { color: #326891; }
+    body[data-style="new-york"] .attribution a { color: #326891; }
+    body[data-style="new-york"] .btn-donate { border-radius: 4px; }
   </style>
 </head>
 <body class="light">
@@ -316,20 +352,33 @@
         <button class="theme-btn" data-theme="light">Light</button>
         <button class="theme-btn" data-theme="dark">Dark</button>
       </div>
+      <div class="toggle-row" style="margin-top: 0.75rem;">
+        <div>
+          <div class="toggle-label">Style</div>
+          <div class="toggle-desc">Choose a visual style</div>
+        </div>
+      </div>
+      <div class="style-selector" id="styleSelector">
+        <button class="theme-btn active" data-style="classic">Classic</button>
+        <button class="theme-btn" data-style="new-york">New York</button>
+      </div>
     </div>
 
     <!-- Support -->
-    <div class="card" style="text-align: center;">
-      <h2 style="justify-content: center;"><span class="icon">💜</span> Support Distracted Work</h2>
-      <p style="margin-bottom: 1rem; font-size: 0.9rem; color: #666;">
-        This extension is free and collects zero data. If you find it useful, consider supporting development.
-      </p>
-      <a class="btn-donate" id="donateLink" href="https://ko-fi.com/alloydwhitlock" target="_blank">Buy Me a Coffee</a>
-      <div class="donor-section">
-        <label>
-          <input type="checkbox" id="donorToggle">
-          I've donated — hide the credit as a thank you
+    <div class="card">
+      <h2><span class="icon">💜</span> Support</h2>
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-label">Hide author credit</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="hideAuthorToggle">
+          <span class="toggle-slider"></span>
         </label>
+      </div>
+      <div class="coffee-message" id="coffeeMessage">
+        <p>Like Distracted Work? Consider buying me a coffee!</p>
+        <a class="btn-donate" id="donateLink" href="https://ko-fi.com/alloydwhitlock" target="_blank">Buy Me a Coffee</a>
       </div>
     </div>
 

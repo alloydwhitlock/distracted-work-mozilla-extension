@@ -64,6 +64,12 @@ describe('Popup Page', () => {
     expect(btn.textContent).toBe('Options');
   });
 
+  test('has a theme cycle button', () => {
+    const btn = document.getElementById('themeBtn');
+    expect(btn).not.toBeNull();
+    expect(btn.textContent).toBe('Auto');
+  });
+
   test('has a donate button/link with correct Ko-fi URL', () => {
     const btn = document.getElementById('donateBtn');
     expect(btn).not.toBeNull();
