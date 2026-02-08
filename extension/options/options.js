@@ -352,16 +352,11 @@
   // Style selector
   function applyStyle(style) {
     document.body.setAttribute('data-style', style);
-    var btns = styleSelector.querySelectorAll('.theme-btn');
-    btns.forEach(function (btn) {
-      btn.classList.toggle('active', btn.dataset.style === style);
-    });
+    styleSelector.value = style;
   }
 
-  styleSelector.addEventListener('click', function (e) {
-    var btn = e.target.closest('.theme-btn');
-    if (!btn) return;
-    var style = btn.dataset.style;
+  styleSelector.addEventListener('change', function () {
+    var style = styleSelector.value;
     applyStyle(style);
 
     browser.runtime.sendMessage({ type: 'getSettings' }).then(function (settings) {

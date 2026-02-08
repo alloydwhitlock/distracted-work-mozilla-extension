@@ -107,21 +107,32 @@ describe('Options Page', () => {
     expect(autoBtn.classList.contains('active')).toBe(true);
   });
 
-  test('has dark mode CSS rules', () => {
+  test('links to shared themes CSS', () => {
+    const link = document.querySelector('link[href*="themes.css"]');
+    expect(link).not.toBeNull();
+  });
+
+  test('uses CSS variables for theming', () => {
     const styles = document.querySelector('style');
-    expect(styles.textContent).toContain('body.dark');
-    expect(styles.textContent).toContain('body.light');
+    expect(styles.textContent).toContain('var(--bg)');
+    expect(styles.textContent).toContain('var(--accent)');
   });
 
   // --- Style ---
 
-  test('has a style selector with Classic and New York buttons', () => {
+  test('has a style selector with all theme options', () => {
     const selector = document.getElementById('styleSelector');
     expect(selector).not.toBeNull();
-    const buttons = selector.querySelectorAll('.theme-btn');
-    expect(buttons.length).toBe(2);
-    const styles = Array.from(buttons).map(b => b.dataset.style);
-    expect(styles).toEqual(['classic', 'new-york']);
+    expect(selector.tagName).toBe('SELECT');
+    const options = selector.querySelectorAll('option');
+    expect(options.length).toBeGreaterThanOrEqual(15);
+    expect(options[0].value).toBe('classic');
+    // Verify key themes exist
+    const values = Array.from(options).map(o => o.value);
+    expect(values).toContain('nord');
+    expect(values).toContain('catppuccin');
+    expect(values).toContain('tokyo-night');
+    expect(values).toContain('dracula');
   });
 
   // --- Support ---

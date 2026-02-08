@@ -84,10 +84,15 @@ describe('Redirect Page', () => {
     expect(btn.textContent).toBe('Auto');
   });
 
-  test('has dark mode CSS rules', () => {
+  test('links to shared themes CSS', () => {
+    const link = document.querySelector('link[href*="themes.css"]');
+    expect(link).not.toBeNull();
+  });
+
+  test('uses CSS variables for theming', () => {
     const styles = document.querySelector('style');
-    expect(styles.textContent).toContain('body.dark');
-    expect(styles.textContent).toContain('body.light');
+    expect(styles.textContent).toContain('var(--bg)');
+    expect(styles.textContent).toContain('var(--accent)');
   });
 
   test('has attribution with Adam Whitlock link', () => {

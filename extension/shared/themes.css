@@ -1,0 +1,244 @@
+/**
+ * Distracted Work - Theme Definitions
+ * CSS custom properties per theme, applied via data-style attribute on <body>.
+ */
+
+/* === Classic (default) === */
+body.light {
+  --bg: #f5f5f5; --text: #333; --text-muted: #888;
+  --card-bg: #fff; --card-border: transparent;
+  --accent: #4361ee; --accent-hover: #3651d4;
+  --input-bg: #fff; --input-border: #ddd; --divider: #f0f0f0;
+}
+body.dark {
+  --bg: #1a1a2e; --text: #e0e0e0; --text-muted: #888;
+  --card-bg: #16213e; --card-border: #1a1a4e;
+  --accent: #4361ee; --accent-hover: #3651d4;
+  --input-bg: #0f3460; --input-border: #1a1a4e; --divider: #1a1a4e;
+}
+
+/* === New York === */
+body[data-style="new-york"] { --font: Georgia, 'Times New Roman', Times, serif; }
+body[data-style="new-york"].light {
+  --bg: #faf9f6; --text: #121212; --text-muted: #666;
+  --card-bg: #fff; --card-border: #e0ddd8;
+  --accent: #326891; --accent-hover: #2a5a7e;
+  --input-bg: #fff; --input-border: #e0ddd8; --divider: #e0ddd8;
+}
+body[data-style="new-york"].dark {
+  --bg: #121212; --text: #f0f0f0; --text-muted: #999;
+  --card-bg: #1a1a1a; --card-border: #333;
+  --accent: #326891; --accent-hover: #2a5a7e;
+  --input-bg: #1a1a1a; --input-border: #333; --divider: #333;
+}
+body[data-style="new-york"] #message { font-weight: 400; font-style: italic; letter-spacing: -0.01em; }
+
+/* === Nord === */
+body[data-style="nord"].light {
+  --bg: #eceff4; --text: #2e3440; --text-muted: #4c566a;
+  --card-bg: #e5e9f0; --card-border: #d8dee9;
+  --accent: #5e81ac; --accent-hover: #4c6e96;
+  --input-bg: #e5e9f0; --input-border: #d8dee9; --divider: #d8dee9;
+}
+body[data-style="nord"].dark {
+  --bg: #2e3440; --text: #d8dee9; --text-muted: #81a1c1;
+  --card-bg: #3b4252; --card-border: #434c5e;
+  --accent: #88c0d0; --accent-hover: #5e81ac;
+  --input-bg: #3b4252; --input-border: #434c5e; --divider: #434c5e;
+}
+
+/* === Catppuccin === */
+body[data-style="catppuccin"].light {
+  --bg: #eff1f5; --text: #4c4f69; --text-muted: #6c6f85;
+  --card-bg: #e6e9ef; --card-border: #ccd0da;
+  --accent: #1e66f5; --accent-hover: #1a5adb;
+  --input-bg: #e6e9ef; --input-border: #ccd0da; --divider: #ccd0da;
+}
+body[data-style="catppuccin"].dark {
+  --bg: #1e1e2e; --text: #cdd6f4; --text-muted: #a6adc8;
+  --card-bg: #313244; --card-border: #45475a;
+  --accent: #89b4fa; --accent-hover: #74a8fc;
+  --input-bg: #313244; --input-border: #45475a; --divider: #45475a;
+}
+
+/* === Tokyo Night === */
+body[data-style="tokyo-night"].light {
+  --bg: #d5d6db; --text: #343b58; --text-muted: #565a6e;
+  --card-bg: #cbccd1; --card-border: #b4b5b9;
+  --accent: #34548a; --accent-hover: #2a4370;
+  --input-bg: #cbccd1; --input-border: #b4b5b9; --divider: #b4b5b9;
+}
+body[data-style="tokyo-night"].dark {
+  --bg: #1a1b26; --text: #a9b1d6; --text-muted: #565f89;
+  --card-bg: #24283b; --card-border: #414868;
+  --accent: #7aa2f7; --accent-hover: #89b4fa;
+  --input-bg: #24283b; --input-border: #414868; --divider: #414868;
+}
+
+/* === Molokai === */
+body[data-style="molokai"].light {
+  --bg: #fafaf5; --text: #272822; --text-muted: #75715e;
+  --card-bg: #f8f8f2; --card-border: #e0e0d0;
+  --accent: #f92672; --accent-hover: #d11a60;
+  --input-bg: #f8f8f2; --input-border: #e0e0d0; --divider: #e0e0d0;
+}
+body[data-style="molokai"].dark {
+  --bg: #1b1d1e; --text: #f8f8f2; --text-muted: #75715e;
+  --card-bg: #272822; --card-border: #3e3d32;
+  --accent: #a6e22e; --accent-hover: #8cc417;
+  --input-bg: #272822; --input-border: #3e3d32; --divider: #3e3d32;
+}
+
+/* === Dracula === */
+body[data-style="dracula"].light {
+  --bg: #f8f8f2; --text: #282a36; --text-muted: #6272a4;
+  --card-bg: #fff; --card-border: #e0e0e0;
+  --accent: #bd93f9; --accent-hover: #a87af5;
+  --input-bg: #fff; --input-border: #e0e0e0; --divider: #e0e0e0;
+}
+body[data-style="dracula"].dark {
+  --bg: #282a36; --text: #f8f8f2; --text-muted: #6272a4;
+  --card-bg: #44475a; --card-border: #6272a4;
+  --accent: #bd93f9; --accent-hover: #a87af5;
+  --input-bg: #44475a; --input-border: #6272a4; --divider: #6272a4;
+}
+
+/* === Solarized === */
+body[data-style="solarized"].light {
+  --bg: #fdf6e3; --text: #657b83; --text-muted: #93a1a1;
+  --card-bg: #eee8d5; --card-border: #d3cbae;
+  --accent: #268bd2; --accent-hover: #1a6da8;
+  --input-bg: #eee8d5; --input-border: #d3cbae; --divider: #d3cbae;
+}
+body[data-style="solarized"].dark {
+  --bg: #002b36; --text: #839496; --text-muted: #586e75;
+  --card-bg: #073642; --card-border: #004052;
+  --accent: #268bd2; --accent-hover: #1a6da8;
+  --input-bg: #073642; --input-border: #004052; --divider: #004052;
+}
+
+/* === Gruvbox === */
+body[data-style="gruvbox"].light {
+  --bg: #fbf1c7; --text: #3c3836; --text-muted: #7c6f64;
+  --card-bg: #ebdbb2; --card-border: #d5c4a1;
+  --accent: #d65d0e; --accent-hover: #af3a03;
+  --input-bg: #ebdbb2; --input-border: #d5c4a1; --divider: #d5c4a1;
+}
+body[data-style="gruvbox"].dark {
+  --bg: #282828; --text: #ebdbb2; --text-muted: #a89984;
+  --card-bg: #3c3836; --card-border: #504945;
+  --accent: #fe8019; --accent-hover: #d65d0e;
+  --input-bg: #3c3836; --input-border: #504945; --divider: #504945;
+}
+
+/* === One Dark === */
+body[data-style="one-dark"].light {
+  --bg: #fafafa; --text: #383a42; --text-muted: #a0a1a7;
+  --card-bg: #fff; --card-border: #e0e0e0;
+  --accent: #4078f2; --accent-hover: #3268d8;
+  --input-bg: #fff; --input-border: #e0e0e0; --divider: #e0e0e0;
+}
+body[data-style="one-dark"].dark {
+  --bg: #282c34; --text: #abb2bf; --text-muted: #5c6370;
+  --card-bg: #21252b; --card-border: #3e4452;
+  --accent: #61afef; --accent-hover: #4d9de5;
+  --input-bg: #21252b; --input-border: #3e4452; --divider: #3e4452;
+}
+
+/* === Rosé Pine === */
+body[data-style="rose-pine"].light {
+  --bg: #faf4ed; --text: #575279; --text-muted: #9893a5;
+  --card-bg: #fffaf3; --card-border: #dfdad9;
+  --accent: #907aa9; --accent-hover: #7a6494;
+  --input-bg: #fffaf3; --input-border: #dfdad9; --divider: #dfdad9;
+}
+body[data-style="rose-pine"].dark {
+  --bg: #191724; --text: #e0def4; --text-muted: #6e6a86;
+  --card-bg: #1f1d2e; --card-border: #26233a;
+  --accent: #c4a7e7; --accent-hover: #b08fdb;
+  --input-bg: #1f1d2e; --input-border: #26233a; --divider: #26233a;
+}
+
+/* === Synthwave '84 === */
+body[data-style="synthwave-84"].light {
+  --bg: #f5e6ff; --text: #2a1a3e; --text-muted: #7a5a9e;
+  --card-bg: #efe0fb; --card-border: #d8c5ee;
+  --accent: #ff7edb; --accent-hover: #e060c0;
+  --input-bg: #efe0fb; --input-border: #d8c5ee; --divider: #d8c5ee;
+}
+body[data-style="synthwave-84"].dark {
+  --bg: #262335; --text: #f0e6ff; --text-muted: #9d8bba;
+  --card-bg: #34294f; --card-border: #495495;
+  --accent: #ff7edb; --accent-hover: #e060c0;
+  --input-bg: #34294f; --input-border: #495495; --divider: #495495;
+}
+
+/* === Everforest === */
+body[data-style="everforest"].light {
+  --bg: #fdf6e3; --text: #5c6a72; --text-muted: #829181;
+  --card-bg: #f3ead3; --card-border: #e0d5b7;
+  --accent: #8da101; --accent-hover: #7a8c00;
+  --input-bg: #f3ead3; --input-border: #e0d5b7; --divider: #e0d5b7;
+}
+body[data-style="everforest"].dark {
+  --bg: #2d353b; --text: #d3c6aa; --text-muted: #859289;
+  --card-bg: #343f44; --card-border: #475258;
+  --accent: #a7c080; --accent-hover: #93b06e;
+  --input-bg: #343f44; --input-border: #475258; --divider: #475258;
+}
+
+/* === Kanagawa === */
+body[data-style="kanagawa"].light {
+  --bg: #f2ecbc; --text: #43436c; --text-muted: #8a8980;
+  --card-bg: #e7dba0; --card-border: #d5c888;
+  --accent: #957fb8; --accent-hover: #8068a3;
+  --input-bg: #e7dba0; --input-border: #d5c888; --divider: #d5c888;
+}
+body[data-style="kanagawa"].dark {
+  --bg: #1f1f28; --text: #dcd7ba; --text-muted: #727169;
+  --card-bg: #2a2a37; --card-border: #363646;
+  --accent: #957fb8; --accent-hover: #8068a3;
+  --input-bg: #2a2a37; --input-border: #363646; --divider: #363646;
+}
+
+/* === Ayu === */
+body[data-style="ayu"].light {
+  --bg: #fafafa; --text: #575f66; --text-muted: #828c99;
+  --card-bg: #fff; --card-border: #e7e8e9;
+  --accent: #ff9940; --accent-hover: #e68530;
+  --input-bg: #fff; --input-border: #e7e8e9; --divider: #e7e8e9;
+}
+body[data-style="ayu"].dark {
+  --bg: #0a0e14; --text: #b3b1ad; --text-muted: #626a73;
+  --card-bg: #0d1117; --card-border: #1d252c;
+  --accent: #ffb454; --accent-hover: #ff9940;
+  --input-bg: #0d1117; --input-border: #1d252c; --divider: #1d252c;
+}
+
+/* === Palenight === */
+body[data-style="palenight"].light {
+  --bg: #f5f0ff; --text: #4a4a6a; --text-muted: #8888a8;
+  --card-bg: #fff; --card-border: #e0daf0;
+  --accent: #82aaff; --accent-hover: #6d96ee;
+  --input-bg: #fff; --input-border: #e0daf0; --divider: #e0daf0;
+}
+body[data-style="palenight"].dark {
+  --bg: #292d3e; --text: #a6accd; --text-muted: #676e95;
+  --card-bg: #1f2233; --card-border: #3b3f5c;
+  --accent: #82aaff; --accent-hover: #6d96ee;
+  --input-bg: #1f2233; --input-border: #3b3f5c; --divider: #3b3f5c;
+}
+
+/* === Horizon === */
+body[data-style="horizon"].light {
+  --bg: #fdf0ed; --text: #403c3d; --text-muted: #948a8b;
+  --card-bg: #fff; --card-border: #e8d5cf;
+  --accent: #da103f; --accent-hover: #c00e37;
+  --input-bg: #fff; --input-border: #e8d5cf; --divider: #e8d5cf;
+}
+body[data-style="horizon"].dark {
+  --bg: #1c1e26; --text: #d5d0d0; --text-muted: #6c6f93;
+  --card-bg: #232530; --card-border: #2e303e;
+  --accent: #e95678; --accent-hover: #d43f62;
+  --input-bg: #232530; --input-border: #2e303e; --divider: #2e303e;
+}
