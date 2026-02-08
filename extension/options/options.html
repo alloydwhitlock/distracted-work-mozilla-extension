@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Distracted Work - Options</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.light { background: #f5f5f5; color: #333; }
+    body.dark { background: #1a1a2e; color: #e0e0e0; }
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    h1 { font-size: 1.75rem; font-weight: 800; margin-bottom: 0.25rem; }
+    body.dark h1 { color: #fff; }
+
+    .tagline { color: #888; margin-bottom: 2rem; font-size: 0.95rem; }
+
+    .card {
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+    body.light .card { background: #fff; }
+    body.dark .card { background: #16213e; border: 1px solid #1a1a4e; }
+
+    .card h2 {
+      font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .card h2 .icon { font-size: 1.2rem; }
+
+    /* Toggle Switch */
+    .toggle-row {
+      display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0;
+    }
+    .toggle-label { font-weight: 500; }
+    .toggle-desc { font-size: 0.85rem; color: #888; margin-top: 0.15rem; }
+    .toggle { position: relative; width: 42px; height: 24px; flex-shrink: 0; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      position: absolute; cursor: pointer; inset: 0;
+      background-color: #ccc; border-radius: 24px; transition: 0.3s;
+    }
+    .toggle-slider::before {
+      position: absolute; content: ""; height: 18px; width: 18px;
+      left: 3px; bottom: 3px; background-color: white; border-radius: 50%; transition: 0.3s;
+    }
+    .toggle input:checked + .toggle-slider { background-color: #4361ee; }
+    .toggle input:checked + .toggle-slider::before { transform: translateX(18px); }
+
+    /* Add site form */
+    .add-form { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; }
+    .add-form input[type="text"] {
+      flex: 1; padding: 0.6rem 0.75rem; border: 1px solid #ddd;
+      border-radius: 8px; font-size: 0.9rem; outline: none;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+    body.dark .add-form input[type="text"] {
+      background: #0f3460; border-color: #1a1a4e; color: #e0e0e0;
+    }
+    .add-form input[type="text"]:focus {
+      border-color: #4361ee; box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.15);
+    }
+    .add-form button {
+      padding: 0.6rem 1.25rem; background: #4361ee; color: #fff;
+      border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+    }
+    .add-form button:hover { background: #3651d4; }
+    .add-options {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 1rem; font-size: 0.85rem; color: #666;
+    }
+    body.dark .add-options { color: #aaa; }
+    .add-options label { display: flex; align-items: center; gap: 0.3rem; cursor: pointer; }
+
+    /* Site list */
+    .site-list { list-style: none; }
+    .site-list li {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.6rem 0; border-bottom: 1px solid #f0f0f0;
+    }
+    body.dark .site-list li { border-bottom-color: #1a1a4e; }
+    .site-list li:last-child { border-bottom: none; }
+    .site-info { display: flex; align-items: center; gap: 0.5rem; }
+    .site-domain { font-weight: 500; font-size: 0.95rem; }
+    .badge {
+      font-size: 0.65rem; font-weight: 700; padding: 0.15rem 0.5rem;
+      border-radius: 10px; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .badge-permanent { background: #ffe0e0; color: #c0392b; }
+    body.dark .badge-permanent { background: #4a1a1a; color: #ff6b6b; }
+    .btn-remove {
+      background: none; border: 1px solid #ddd; border-radius: 6px;
+      padding: 0.3rem 0.6rem; font-size: 0.8rem; cursor: pointer; color: #888;
+    }
+    body.dark .btn-remove { border-color: #444; color: #aaa; }
+    .btn-remove:hover { background: #fee; border-color: #e74c3c; color: #e74c3c; }
+    body.dark .btn-remove:hover { background: #4a1a1a; }
+    .empty-state { text-align: center; padding: 2rem; color: #aaa; font-size: 0.9rem; }
+
+    /* Schedule */
+    .schedule-grid { display: grid; gap: 0.75rem; margin-top: 0.75rem; }
+    .schedule-row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+    .schedule-row label { font-size: 0.9rem; font-weight: 500; min-width: 60px; }
+    .schedule-row input[type="time"] {
+      padding: 0.4rem 0.5rem; border: 1px solid #ddd; border-radius: 6px; font-size: 0.9rem;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+    body.dark .schedule-row input[type="time"] {
+      background: #0f3460; border-color: #1a1a4e; color: #e0e0e0;
+    }
+    .day-picker { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+    .day-btn {
+      width: 36px; height: 36px; border: 1px solid #ddd; border-radius: 8px;
+      background: #fff; font-size: 0.75rem; font-weight: 600; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+    body.dark .day-btn { background: #0f3460; border-color: #1a1a4e; color: #e0e0e0; }
+    .day-btn.active { background: #4361ee; color: #fff; border-color: #4361ee; }
+    .schedule-disabled { opacity: 0.4; pointer-events: none; }
+
+    /* Theme selector */
+    .theme-selector { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+    .theme-btn {
+      padding: 0.4rem 0.9rem; border: 1px solid #ddd; border-radius: 8px;
+      background: #fff; font-size: 0.85rem; font-weight: 500; cursor: pointer;
+      transition: all 0.2s;
+    }
+    body.dark .theme-btn { background: #0f3460; border-color: #1a1a4e; color: #e0e0e0; }
+    .theme-btn.active { background: #4361ee; color: #fff; border-color: #4361ee; }
+
+    /* Footer */
+    .footer-links {
+      display: flex; gap: 1.5rem; justify-content: center;
+      margin-top: 1rem; font-size: 0.85rem;
+    }
+    .footer-links a { color: #4361ee; text-decoration: none; }
+    .footer-links a:hover { text-decoration: underline; }
+
+    .attribution {
+      text-align: center; margin-top: 1.5rem; padding-top: 1rem;
+      border-top: 1px solid #eee; font-size: 0.8rem; color: #999;
+    }
+    body.dark .attribution { border-top-color: #1a1a4e; color: #666; }
+    .attribution a { color: #4361ee; text-decoration: none; }
+    .attribution a:hover { text-decoration: underline; }
+
+    .btn-donate {
+      display: inline-block; padding: 0.5rem 1.25rem; background: #ff6b35;
+      color: #fff; border: none; border-radius: 8px; font-size: 0.9rem;
+      font-weight: 600; cursor: pointer; text-decoration: none;
+    }
+    .btn-donate:hover { background: #e55a28; }
+
+    .message {
+      font-size: 0.85rem; padding: 0.5rem; border-radius: 6px; margin-top: 0.5rem; display: none;
+    }
+    .message.success { display: block; background: #d4edda; color: #155724; }
+    .message.error { display: block; background: #f8d7da; color: #721c24; }
+    body.dark .message.success { background: #1a3a2a; color: #4caf50; }
+    body.dark .message.error { background: #3a1a1a; color: #ff6b6b; }
+    .save-row { display: flex; align-items: center; justify-content: space-between; margin-top: 1rem; }
+    .btn-save {
+      padding: 0.6rem 1.5rem; background: #4361ee; color: #fff;
+      border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+    }
+    .btn-save:hover { background: #3651d4; }
+
+    /* Permanent removal modal overlay */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      z-index: 1000; align-items: center; justify-content: center;
+    }
+    .modal-overlay.visible { display: flex; }
+    .modal {
+      background: #fff; border-radius: 16px; padding: 2rem; max-width: 420px;
+      width: 90%; text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      animation: modalIn 0.25s ease-out;
+    }
+    body.dark .modal { background: #16213e; color: #e0e0e0; }
+    .modal h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .modal p { font-size: 0.95rem; color: #666; margin-bottom: 1.5rem; line-height: 1.5; }
+    body.dark .modal p { color: #aaa; }
+    .modal-domain { font-weight: 700; color: #e74c3c; }
+    .modal-buttons { display: flex; gap: 0.75rem; justify-content: center; }
+    .modal-btn {
+      padding: 0.6rem 1.5rem; border: none; border-radius: 8px;
+      font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.15s;
+      min-width: 100px;
+    }
+    .modal-btn-cancel { background: #4361ee; color: #fff; }
+    .modal-btn-cancel:hover { background: #3651d4; }
+    .modal-btn-confirm { background: #eee; color: #888; font-size: 0.8rem; }
+    body.dark .modal-btn-confirm { background: #0f3460; color: #888; }
+    .modal-btn-confirm:hover { background: #f8d7da; color: #721c24; }
+    body.dark .modal-btn-confirm:hover { background: #4a1a1a; color: #ff6b6b; }
+
+    /* Button swap on hover for the first modal step */
+    .modal-buttons.swappy:hover .modal-btn-cancel { order: 2; }
+    .modal-buttons.swappy:hover .modal-btn-confirm { order: 1; }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Donor thank-you section */
+    .donor-section { margin-top: 1rem; font-size: 0.85rem; color: #666; }
+    body.dark .donor-section { color: #aaa; }
+    .donor-section label { display: flex; align-items: center; gap: 0.4rem; cursor: pointer; }
+  </style>
+</head>
+<body class="light">
+  <div class="container">
+    <h1>Distracted Work</h1>
+    <p class="tagline">Stay focused. Get things done.</p>
+
+    <!-- Master Toggle -->
+    <div class="card">
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-label">Blocking Enabled</div>
+          <div class="toggle-desc">Turn off to temporarily allow all sites</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="enableToggle" checked>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Blocked Sites -->
+    <div class="card">
+      <h2><span class="icon">🚫</span> Blocked Sites</h2>
+      <div class="add-form">
+        <input type="text" id="newSiteInput" placeholder="e.g. reddit.com, twitter.com">
+        <button id="addSiteBtn">Add</button>
+      </div>
+      <div class="add-options">
+        <label>
+          <input type="checkbox" id="permanentCheck">
+          Permanent block (always on, ignores schedule)
+        </label>
+      </div>
+      <div class="message" id="addFeedback"></div>
+      <ul class="site-list" id="siteList">
+        <li class="empty-state">No sites blocked yet. Add one above.</li>
+      </ul>
+    </div>
+
+    <!-- Schedule -->
+    <div class="card">
+      <h2><span class="icon">🕐</span> Schedule</h2>
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-label">Schedule Blocking</div>
+          <div class="toggle-desc">Only block non-permanent sites during specific hours</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="scheduleToggle">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="schedule-grid" id="scheduleConfig">
+        <div class="schedule-row">
+          <label>Days:</label>
+          <div class="day-picker" id="dayPicker">
+            <button class="day-btn" data-day="0">Su</button>
+            <button class="day-btn active" data-day="1">Mo</button>
+            <button class="day-btn active" data-day="2">Tu</button>
+            <button class="day-btn active" data-day="3">We</button>
+            <button class="day-btn active" data-day="4">Th</button>
+            <button class="day-btn active" data-day="5">Fr</button>
+            <button class="day-btn" data-day="6">Sa</button>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <label>From:</label>
+          <input type="time" id="startTime" value="09:00">
+          <label>To:</label>
+          <input type="time" id="endTime" value="17:00">
+        </div>
+      </div>
+      <div class="save-row">
+        <div class="message" id="scheduleFeedback"></div>
+        <button class="btn-save" id="saveScheduleBtn">Save Schedule</button>
+      </div>
+    </div>
+
+    <!-- Appearance -->
+    <div class="card">
+      <h2><span class="icon">🎨</span> Appearance</h2>
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-label">Theme</div>
+          <div class="toggle-desc">Choose how the extension looks</div>
+        </div>
+      </div>
+      <div class="theme-selector" id="themeSelector">
+        <button class="theme-btn active" data-theme="auto">Auto</button>
+        <button class="theme-btn" data-theme="light">Light</button>
+        <button class="theme-btn" data-theme="dark">Dark</button>
+      </div>
+    </div>
+
+    <!-- Support -->
+    <div class="card" style="text-align: center;">
+      <h2 style="justify-content: center;"><span class="icon">💜</span> Support Distracted Work</h2>
+      <p style="margin-bottom: 1rem; font-size: 0.9rem; color: #666;">
+        This extension is free and collects zero data. If you find it useful, consider supporting development.
+      </p>
+      <a class="btn-donate" id="donateLink" href="https://ko-fi.com/alloydwhitlock" target="_blank">Buy Me a Coffee</a>
+      <div class="donor-section">
+        <label>
+          <input type="checkbox" id="donorToggle">
+          I've donated — hide the credit as a thank you
+        </label>
+      </div>
+    </div>
+
+    <div class="footer-links">
+      <a href="https://distracted.work" target="_blank">distracted.work</a>
+      <a href="https://distracted.work/privacy.html" target="_blank">Privacy Policy</a>
+    </div>
+
+    <div class="attribution" id="attribution">
+      Brought to you by <a href="https://adamwhitlock.com" target="_blank">Adam Whitlock</a>
+    </div>
+  </div>
+
+  <!-- Permanent block removal modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="confirmModal">
+      <h3 id="modalTitle">Are you sure about that?</h3>
+      <p id="modalMessage">You marked <span class="modal-domain" id="modalDomain"></span> as a permanent block for a reason. Your past self was looking out for you.</p>
+      <div class="modal-buttons swappy" id="modalButtons">
+        <button class="modal-btn modal-btn-cancel" id="modalCancel">Keep it blocked</button>
+        <button class="modal-btn modal-btn-confirm" id="modalConfirm">Yes, remove it</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

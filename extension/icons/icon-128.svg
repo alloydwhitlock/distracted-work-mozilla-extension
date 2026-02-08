@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <!-- Shield shape -->
+  <path d="M64 8 L14 30 L14 62 C14 91 37 113 64 120 C91 113 114 91 114 62 L114 30 Z"
+        fill="#4361ee" stroke="#3651d4" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Prohibition circle -->
+  <circle cx="64" cy="64" r="27" fill="none" stroke="#ffffff" stroke-width="6.5"/>
+  <!-- Prohibition slash -->
+  <line x1="45" y1="45" x2="83" y2="83" stroke="#ffffff" stroke-width="6.5" stroke-linecap="round"/>
+</svg>

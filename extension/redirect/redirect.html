@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Back to Work | distracted.work</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 100vh; transition: background-color 0.3s, color 0.3s;
+      overflow: hidden; user-select: none;
+    }
+
+    body.light { background-color: #f8f9fa; color: #212529; }
+    body.dark { background-color: #1a1a2e; color: #e0e0e0; }
+
+    .container { text-align: center; max-width: 800px; padding: 2rem; }
+
+    #message {
+      font-size: clamp(2rem, 6vw, 4.5rem); font-weight: 800;
+      line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 2rem;
+      opacity: 0; animation: fadeIn 0.6s ease-out forwards;
+    }
+    body.light #message { color: #212529; }
+    body.dark #message { color: #ffffff; }
+
+    .subtitle { font-size: 1.1rem; opacity: 0.6; margin-bottom: 3rem; }
+
+    .actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn {
+      padding: 0.75rem 1.5rem; border: none; border-radius: 8px;
+      font-size: 1rem; font-weight: 600; cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s; text-decoration: none;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .btn:active { transform: translateY(0); }
+    .btn-primary { background-color: #4361ee; color: #fff; }
+    .btn-secondary { background-color: transparent; border: 2px solid currentColor; opacity: 0.7; }
+    body.light .btn-secondary { color: #212529; }
+    body.dark .btn-secondary { color: #e0e0e0; }
+
+    .theme-toggle {
+      position: fixed; top: 1.5rem; right: 1.5rem; background: none; border: none;
+      font-size: 1.1rem; cursor: pointer; opacity: 0.5; transition: opacity 0.2s;
+      padding: 0.3rem 0.6rem; border-radius: 6px;
+    }
+    .theme-toggle:hover { opacity: 1; }
+    body.dark .theme-toggle { color: #e0e0e0; }
+
+    .footer {
+      position: fixed; bottom: 1.5rem; font-size: 0.85rem; opacity: 0.4;
+      display: flex; gap: 1.5rem; align-items: center;
+    }
+    .footer a { color: inherit; text-decoration: underline; }
+    .footer .sep { opacity: 0.3; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="light">
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">Auto</button>
+
+  <div class="container">
+    <div id="message"></div>
+    <p class="subtitle">— distracted.work</p>
+    <div class="actions">
+      <button class="btn btn-primary" id="newMessage">Another One</button>
+      <button class="btn btn-secondary" id="closeTab">Close This Tab</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="https://distracted.work/privacy.html" target="_blank">Privacy Policy</a>
+    <span class="sep">|</span>
+    <span id="redirectAttribution">Brought to you by <a href="https://adamwhitlock.com" target="_blank">Adam Whitlock</a></span>
+  </div>
+
+  <script src="messages.js"></script>
+  <script src="redirect.js"></script>
+</body>
+</html>

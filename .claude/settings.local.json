@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(flox --version:*)",
+      "WebFetch(domain:www.gofuckingwork.com)",
+      "Bash(flox init:*)",
+      "Bash(flox install:*)",
+      "Bash(node --version:*)",
+      "Bash(npm:*)",
+      "Bash(python3:*)",
+      "Bash(npx jest --no-cache)",
+      "Bash(npx jest --coverage)",
+      "Bash(node_modules/.bin/jest:*)",
+      "Bash(source:*)",
+      "Bash(npx web-ext lint:*)",
+      "WebSearch",
+      "Bash(npx jest:*)",
+      "Bash(npx web-ext build:*)",
+      "Bash(unzip:*)"
+    ]
+  }
+}
