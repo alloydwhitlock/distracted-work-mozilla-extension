@@ -103,3 +103,11 @@ jobs:
           tag_name: ${{ steps.version.outputs.tag }}
           generate_release_notes: true
           files: dist/*.zip
+
+      - name: Notify site repo
+        if: steps.check_tag.outputs.exists == 'false'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.SITE_REPO_TOKEN }}
+          repository: alloydwhitlock/distracted-work-site
+          event-type: extension-release
