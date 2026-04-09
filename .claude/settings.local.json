@@ -2,7 +2,6 @@
   "permissions": {
     "allow": [
       "Bash(flox --version:*)",
-      "WebFetch(domain:www.gofuckingwork.com)",
       "Bash(flox init:*)",
       "Bash(flox install:*)",
       "Bash(node --version:*)",
@@ -17,7 +16,6 @@
       "Bash(npx jest:*)",
       "Bash(npx web-ext build:*)",
       "Bash(unzip:*)",
-      "Bash(git -C /Users/whitlock/Projects/distracted-work-extension log --oneline -10)",
       "Bash(find:*)",
       "Bash(gh repo edit:*)"
     ]
